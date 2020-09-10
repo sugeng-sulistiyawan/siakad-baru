@@ -7,6 +7,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name' => APP_NAME,
     'basePath' => BASE_PATH,
     'vendorPath' => VENDOR_PATH,
     'bootstrap' => ['log'],
