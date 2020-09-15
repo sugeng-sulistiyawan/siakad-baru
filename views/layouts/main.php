@@ -9,73 +9,92 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
+
+
+\diecoding\toastr\ToastrFlash::widget();
+\diecoding\DiecodingAsset::register($this);
+
 ?>
+
 <?php $this->beginPage() ?>
+
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
+    <meta charset="<?php echo Yii::$app->charset ?>" />
+    <?php echo Html::csrfMetaTags() ?>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
+    <title>
+        <?php
+        $title = isset($this->title) ? Html::encode($this->title) . ' &mdash; ' . APP_NAME . ' ' . APP_UNIT_FULL :
+            APP_NAME . ' &mdash; ' . APP_UNIT_FULL;
+        echo $title;
+        ?>
+    </title>
+    <link rel="shortcut icon" href="<?php echo Url::base(true) ?>/images/favicon.png">
+
+    <link href="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/plugins/sweet-alert2/sweetalert2.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/css/icons.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/css/style.css" rel="stylesheet" type="text/css">
+
+    <script src="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/js/jquery.min.js"></script>
+
     <?php $this->head() ?>
+
+    <!-- <meta name="theme-color" content="#ffffff" /> -->
+    <meta name="description" content="" />
+    <meta name="author" content="Die Coding - Digital Startup Indonesia" />
+    <meta property="og:title" content="<?php echo $title ?>" />
+    <meta property="og:url" content="<?php echo Url::current([], true) ?>" />
+    <meta property="og:image" content="<?php echo Url::base(true) ?>/images/og.png" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
+    <?php echo $this->render('navbar.php') ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+    <!-- page wrapper start -->
+    <div id="main--content" class="wrapper">
+        <div class="container-fluid">
+
+            <?php echo $content ?>
+
+        </div>
+        <!-- end container-fluid -->
+
     </div>
-</div>
+    <!-- page wrapper end -->
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+    <?php echo $this->render("footer.php") ?>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+    <!-- jQuery  -->
+    <script src="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/plugins/sweet-alert2/sweetalert2.min.js"></script>
+    <script src="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/js/jquery.slimscroll.js"></script>
+    <script src="<?php echo Yii::$app->themeConfig->getPublishedUrl("veltrix") ?>/js/waves.min.js"></script>
 
-<?php $this->endBody() ?>
+    <!-- App js -->
+    <script src="<?php echo Url::to("/js/app.js") ?>"></script>
+
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage() ?>
