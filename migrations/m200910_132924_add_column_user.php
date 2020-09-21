@@ -22,7 +22,6 @@ class m200910_132924_add_column_user extends Migration
     public function down()
     {
         $this->dropColumn('{{%user}}', 'verification_token');
-        $this->dropColumn('{{%user}}', 'kode_user');
         $this->dropColumn('{{%user}}', 'nama_lengkap');
         $this->dropColumn('{{%user}}', 'no_hp');
         $this->dropColumn('{{%user}}', 'photo');

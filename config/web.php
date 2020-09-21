@@ -75,28 +75,28 @@ $config = [
             'decimalSeparator'  => '.',
             'currencyCode'      => 'Rp ',
         ],
-        'assetManager' => [
-            'bundles' => [
-                'yii\bootstrap4\BootstrapAsset' => false,
-                'yii\bootstrap\BootstrapAsset' => false,
-                'yii\bootstrap\BootstrapPluginAsset' => false,
-                'wbraganca\dynamicform\DynamicFormAsset' => [
-                    'basePath' => '@webroot/js',
-                    'baseUrl' => '@web/js',
-                    'js' => [
-                        YII_ENV_DEV ? 'replace-yii2-dynamic-form.js' : 'replace-yii2-dynamic-form.min.js',
-                    ],
-                ],
-                'johnitvn\ajaxcrud\CrudAsset' => [
-                    'basePath' => '@webroot/js',
-                    'baseUrl' => '@web/js',
-                    'depends' => [
-                        'yii\web\YiiAsset',
-                    ],
-                    'css' => [],
-                ],
-            ],
-        ],
+        // 'assetManager' => [
+        //     'bundles' => [
+        //         'yii\bootstrap4\BootstrapAsset' => false,
+        //         'yii\bootstrap\BootstrapAsset' => false,
+        //         'yii\bootstrap\BootstrapPluginAsset' => false,
+        //         'wbraganca\dynamicform\DynamicFormAsset' => [
+        //             'basePath' => '@webroot/js',
+        //             'baseUrl' => '@web/js',
+        //             'js' => [
+        //                 YII_ENV_DEV ? 'replace-yii2-dynamic-form.js' : 'replace-yii2-dynamic-form.min.js',
+        //             ],
+        //         ],
+        //         'johnitvn\ajaxcrud\CrudAsset' => [
+        //             'basePath' => '@webroot/js',
+        //             'baseUrl' => '@web/js',
+        //             'depends' => [
+        //                 'yii\web\YiiAsset',
+        //             ],
+        //             'css' => [],
+        //         ],
+        //     ],
+        // ],
         'i18n' => [
             'translations' => [
                 'diecoding' => [
